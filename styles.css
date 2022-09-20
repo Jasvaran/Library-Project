@@ -95,5 +95,13 @@ table, th, td {
 }
 
 .modal-container {
+	height: 100%;
+	width: 100%;
+	
+}
+
+.modal-content {
+	height: 400px;
+	width: 350px;
 	
 }
