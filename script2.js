@@ -65,24 +65,43 @@ let libraryModule = (function () {
         });
         for (let i = 0; i < bookArray.length; i++) {
             let rowRef = document.getElementById(i);
-            console.log(rowRef)
-    
+            
+           
             let readButton = document.createElement('button');
             readButton.textContent = 'Read';
             readButton.setAttribute('class', i);
             rowRef.appendChild(readButton);
-            console.log(readButton)
-    
+
             readButton.addEventListener('click', () => {
                 bookArray[i].read = !bookArray[i].read
                 renderModule();
+
+            
                 
+            });
+            
+            let delBtn = document.createElement('button');
+            delBtn.textContent = 'Delete';
+            rowRef.appendChild(delBtn);
+            delBtn.addEventListener('click', () => {
+                bookArray.splice(i, 1);
+                renderModule();
             })
-    
+
         }
 
-    };
+        // for (let i = 0; i < bookArray.length; i++) {
+        //     let rowRef = document.getElementById(i);
+        //     let delBtn = document.createElement('button');
+        //     delBtn.textContent = 'Delete';
+        //     rowRef.appendChild(delBtn);
+        //     delBtn.addEventListener('click', () => {
+        //         bookArray.splice(i, 1);
+        //         renderModule();
+        //     })
+        // }
 
+    };
 
 
     addBook.addEventListener('click', () => {
