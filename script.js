@@ -49,38 +49,47 @@ let libraryModule = (function () {
 
     function renderModule() {
         bookTableBody.textContent = ""; 
-        bookArray.forEach(book => { 
-          const bookHtml = `
-            <tr>
-                <td>${book.title}</td>
-                <td>${book.author}</td>
-                <td>${book.pages}</td>
-                <td>${book.read}</td>
-                <td><button class="read" id="read">Read</button></td>
-            </tr>
-          `
-          
-
-          bookTableBody.insertAdjacentHTML("beforeend", bookHtml)
-
+        bookArray.forEach((book, index) => { 
+            createBookItem(book, index)
         });
 
     };
 
-    // function createBookItem(book, index) {
-    //     const bookRow = document.createElement('tr')
+    function createBookItem(book, index) {
+        const bookRow = document.createElement('tr');
+        bookRow.setAttribute('id', index);
+        bookRow.setAttribute('class', 'book-row');
+        bookRow.setAttribute('key', index);
 
-    // }
+        bookRow.appendChild(createBookElement('td', `${book.title}`, 'book-title'));
+        bookRow.appendChild(createBookElement('td', `${book.author}`, 'book-author'));
+        bookRow.appendChild(createBookElement('td', `${book.pages}`, 'book-pages'));
+        bookRow.appendChild(createBookElement('td', `${book.read}`, 'book-read' ))
+        
+
+        
+        
+       
+        const readBtn = createBookElement('button', 'read', 'read');
+        bookRow.appendChild(readBtn)
+    
+        readBtn.addEventListener('click', () => {
+            bookArray[index].read = !bookArray[index].read
+            renderModule();
+        })
+
+        bookTableBody.insertAdjacentElement('afterbegin', bookRow)
+
+    }
 
 
-    // function createReadElement() {
-    //     const readEle = document.createElement('td');
-    //     const readBtn = document.createElement('button');
-    //     readBtn.setAttribute('class', 'read')
 
-    //     readEle.appendChild(readBtn);
-     
-    // }
+    function createBookElement(element, content, className) {
+        const ele = document.createElement(element);
+        ele.textContent = content;
+        ele.setAttribute('class', className)
+        return ele;
+    }
 
 
 
