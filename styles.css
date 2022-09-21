@@ -95,13 +95,59 @@ table, th, td {
 }
 
 .modal-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	position: fixed;
+	z-index: 1;
 	height: 100%;
 	width: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+	
+	
 	
 }
 
 .modal-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background-color: wheat;
 	height: 400px;
 	width: 350px;
+	border: 1px solid	black;
+	border-radius: 10px;
 	
 }
+
+
+.form-row {
+	margin-left: 0.5in;
+	display: flex;
+	justify-content: space-between;
+	align-content: space-between;
+	margin-bottom: 20px;
+}
+
+.close {
+	margin-bottom: 20px;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.submit-button {
+	display: flex;
+	align-self: flex-end;
+	justify-content: center;
+
+}
+
+label {
+	margin-right: 10px;
+}
+
