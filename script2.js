@@ -8,14 +8,28 @@ let libraryModule = (function () {
     const bookAuthor = document.querySelector('#book-author');
     const bookPages = document.querySelector('#book-pages');
     const bookRead = document.querySelector('#book-read');
-    const form = document.querySelector('form').addEventListener('submit', (e) => {
-        addBookToLibrary();
-        e.preventDefault();
-        console.log(e);
-        renderModule();
-        clearForm();
+    const titleError = document.querySelector('.titleError');
+    const authorError = document.querySelector('.authorError');
+    const pageError = document.querySelector('.pagesError');
+    const readError = document.querySelector('.readError');
 
-        modalContainer.style.display = 'none';
+    const form = document.querySelector('form').addEventListener('submit', (e) => {
+        if (!bookTitle.validity.valid || !bookAuthor.validity.valid || !bookPages.validity.valid
+            || !bookPages.validity.valid || !bookRead.validity.valid){
+                e.preventDefault();
+                showError();
+            } else {
+                e.preventDefault();
+                addBookToLibrary();
+                console.log(e);
+                renderModule();
+                clearForm();
+                modalContainer.style.visibility = 'hidden';
+            }
+            
+
+
+        
     })
 
     
@@ -57,7 +71,7 @@ let libraryModule = (function () {
                 <td>${book.pages}</td>
                 <td>${book.read}</td>
             </tr>
-          `
+          `;
           
 
           bookTableBody.insertAdjacentHTML("beforeend", bookHtml)
@@ -65,11 +79,14 @@ let libraryModule = (function () {
         });
         for (let i = 0; i < bookArray.length; i++) {
             let rowRef = document.getElementById(i);
+            // let tdRead = document.createElement('td');
+            
             
            
             let readButton = document.createElement('button');
             readButton.textContent = 'Read';
             readButton.setAttribute('class', i);
+            // tdRead.appendChild(readButton)
             rowRef.appendChild(readButton);
 
             readButton.addEventListener('click', () => {
@@ -79,9 +96,10 @@ let libraryModule = (function () {
             
                 
             });
-            
+            // let tdDelete = document.createElement('td');
             let delBtn = document.createElement('button');
             delBtn.textContent = 'Delete';
+            // tdDelete.appendChild(delBtn)
             rowRef.appendChild(delBtn);
             delBtn.addEventListener('click', () => {
                 bookArray.splice(i, 1);
@@ -90,26 +108,16 @@ let libraryModule = (function () {
 
         }
 
-        // for (let i = 0; i < bookArray.length; i++) {
-        //     let rowRef = document.getElementById(i);
-        //     let delBtn = document.createElement('button');
-        //     delBtn.textContent = 'Delete';
-        //     rowRef.appendChild(delBtn);
-        //     delBtn.addEventListener('click', () => {
-        //         bookArray.splice(i, 1);
-        //         renderModule();
-        //     })
-        // }
 
     };
 
 
     addBook.addEventListener('click', () => {
-        modalContainer.style.display = 'block'
+        modalContainer.style.visibility = 'visible'
     });
     
     close.addEventListener('click', () => {
-        modalContainer.style.display = 'none'
+        modalContainer.style.visibility = 'hidden'
     });
 
     function addBookToLibrary() {
@@ -133,6 +141,9 @@ let libraryModule = (function () {
         bookAuthor.value = "";
         bookPages.value = "";
         bookRead.checked = false;
+        titleError.innerHTML = "";
+        authorError.innerHTML = "";
+        pageError.innerHTML = "";
     }
 
 
@@ -141,7 +152,22 @@ let libraryModule = (function () {
     renderModule();
 
 
-
+    function showError() {
+        if (bookTitle.validity.valueMissing) {
+            titleError.innerHTML = 'Please enter a title'
+        } 
+        if ( bookAuthor.validity.valueMissing) {
+            authorError.innerHTML = "please enter a author"
+        }
+        if (bookPages.validity.valueMissing) {
+            pageError.innerHTML = "Please enter # of pages"
+        } else {
+            titleError.innerHTML = "";
+            authorError.innerHTML = "";
+            pageError.innerHTML = "";
+        }
+    }
+    
 
 
     return {bookArray, BookClass, renderModule}

@@ -43,25 +43,29 @@
             <div class="modal-content">
                 <span class="close">close</span>
                 <div class="modal-form">
-                    <form>
+                    <form novalidate>
                         <div class="form-row">
-                            <label for="book-title">Title</label>
-                            <input type="text" name="book-title" id="book-title" class="form-input">
+                            <label for="book-title">Title*</label>
+                            <input type="text" name="book-title" id="book-title" class="form-input" required>
+                            <span class="titleError active"></span>
                         </div>
                         <div class="form-row">
-                            <label for="book-author">Author</label>
-                            <input type="text" name="book-author" id="book-author" class="form-input">
+                            <label for="book-author">Author*</label>
+                            <input type="text" name="book-author" id="book-author" class="form-input" required>
+                            <span class="authorError active"></span>
                         </div>
                         <div class="form-row">
-                            <label for="book-pages">Pages</label>
-                            <input type="number" name="book-pages" id="book-pages" class="form-input">
+                            <label for="book-pages">Pages*</label>
+                            <input type="number" name="book-pages" id="book-pages" class="form-input" required>
+                            <span class="pagesError active"></span>
                         </div>
                         <div class="form-row">
                             <label for="book-read">Read?</label>
                             <input type="checkbox" name="book-read" id="book-read" class="form-input">
+                            <span class="readError active"></span>
                         </div>
                         <div class="submit-button">
-                            <button type="submit">Submit</button>
+                            <button type="submit">Submit*</button>
                         </div>
                     </form>
                 </div>
